@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { PropertyPhoto } from './property-photo.entity';
 import { PropertyTypeEnum } from '../enums/property-type.enum';
+import { RoomTypeEnum } from '../enums/room-type.enum';
 
 @Entity('properties')
 export class Property {
@@ -29,8 +30,11 @@ export class Property {
   })
   property_type: PropertyTypeEnum;
 
-  @Column()
-  room_type: string;
+  @Column({
+    type: 'enum',
+    enum: RoomTypeEnum,
+  })
+  room_type: RoomTypeEnum;
 
   @Column()
   address: string;

@@ -1,5 +1,6 @@
 import { IsEnum, IsInt, IsNumber, IsOptional, IsString } from 'class-validator';
 import { PropertyTypeEnum } from '../enums/property-type.enum';
+import { RoomTypeEnum } from '../enums/room-type.enum';
 
 export class CreatePropertyDto {
   @IsNumber()
@@ -14,8 +15,8 @@ export class CreatePropertyDto {
   @IsEnum(PropertyTypeEnum)
   property_type: PropertyTypeEnum;
 
-  @IsString()
-  room_type: string;
+  @IsEnum(RoomTypeEnum)
+  room_type: RoomTypeEnum;
 
   @IsString()
   address: string;
