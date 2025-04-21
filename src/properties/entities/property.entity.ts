@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { PropertyPhoto } from './property-photo.entity';
+import { PropertyTypeEnum } from '../enums/property-type.enum';
 
 @Entity('properties')
 export class Property {
@@ -22,8 +23,11 @@ export class Property {
   @Column()
   description: string;
 
-  @Column()
-  property_type: string;
+  @Column({
+    type: 'enum',
+    enum: PropertyTypeEnum,
+  })
+  property_type: PropertyTypeEnum;
 
   @Column()
   room_type: string;

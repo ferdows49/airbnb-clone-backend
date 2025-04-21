@@ -1,4 +1,5 @@
-import { IsInt, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsNumber, IsOptional, IsString } from 'class-validator';
+import { PropertyTypeEnum } from '../enums/property-type.enum';
 
 export class UpdatePropertyDto {
   @IsOptional()
@@ -10,8 +11,8 @@ export class UpdatePropertyDto {
   description?: string;
 
   @IsOptional()
-  @IsString()
-  property_type?: string;
+  @IsEnum(PropertyTypeEnum)
+  property_type?: PropertyTypeEnum;
 
   @IsOptional()
   @IsString()
