@@ -9,6 +9,11 @@ import {
 import { PropertyPhoto } from './property-photo.entity';
 import { PropertyTypeEnum } from '../enums/property-type.enum';
 import { RoomTypeEnum } from '../enums/room-type.enum';
+import {
+  GuestFavoriteAmenitiesEnum,
+  SafetyAmenitiesEnum,
+  StandoutAmenitiesEnum,
+} from '../enums/amenities.enum';
 
 @Entity('properties')
 export class Property {
@@ -65,6 +70,33 @@ export class Property {
 
   @Column()
   max_guests: number;
+
+  @Column()
+  num_beds: number;
+
+  @Column({
+    type: 'enum',
+    enum: GuestFavoriteAmenitiesEnum,
+    array: true,
+    default: () => 'ARRAY[]::guest_favorite_amenities_enum[]',
+  })
+  guest_Favorite_amenities: GuestFavoriteAmenitiesEnum[];
+
+  @Column({
+    type: 'enum',
+    enum: StandoutAmenitiesEnum,
+    array: true,
+    default: () => 'ARRAY[]::standout_amenities_enum[]',
+  })
+  standout_amenities: StandoutAmenitiesEnum[];
+
+  @Column({
+    type: 'enum',
+    enum: SafetyAmenitiesEnum,
+    array: true,
+    default: () => 'ARRAY[]::safety_amenities_enum[]',
+  })
+  safety_amenities: SafetyAmenitiesEnum[];
 
   @Column('decimal', { precision: 10, scale: 2 })
   price_per_night: number;
