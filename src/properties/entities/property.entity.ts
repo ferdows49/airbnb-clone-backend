@@ -32,12 +32,14 @@ export class Property {
   @Column({
     type: 'enum',
     enum: PropertyTypeEnum,
+    default: PropertyTypeEnum.APARTMENT,
   })
   property_type: PropertyTypeEnum;
 
   @Column({
     type: 'enum',
     enum: RoomTypeEnum,
+    default: RoomTypeEnum.ENTIRE_PLACE,
   })
   room_type: RoomTypeEnum;
 
@@ -71,31 +73,26 @@ export class Property {
   @Column()
   max_guests: number;
 
-  @Column()
+  @Column({ type: 'int', nullable: true })
   num_beds: number;
 
   @Column({
     type: 'enum',
     enum: GuestFavoriteAmenitiesEnum,
     array: true,
-    default: () => 'ARRAY[]::guest_favorite_amenities_enum[]',
+    default: [],
   })
-  guest_Favorite_amenities: GuestFavoriteAmenitiesEnum[];
+  guest_favorite_amenities: GuestFavoriteAmenitiesEnum[];
 
   @Column({
     type: 'enum',
     enum: StandoutAmenitiesEnum,
     array: true,
-    default: () => 'ARRAY[]::standout_amenities_enum[]',
+    default: [],
   })
   standout_amenities: StandoutAmenitiesEnum[];
 
-  @Column({
-    type: 'enum',
-    enum: SafetyAmenitiesEnum,
-    array: true,
-    default: () => 'ARRAY[]::safety_amenities_enum[]',
-  })
+  @Column({ type: 'enum', enum: SafetyAmenitiesEnum, array: true, default: [] })
   safety_amenities: SafetyAmenitiesEnum[];
 
   @Column('decimal', { precision: 10, scale: 2 })
@@ -107,15 +104,9 @@ export class Property {
   @Column('decimal', { precision: 10, scale: 2, default: 0 })
   service_fee: number;
 
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
-
-  @OneToMany(() => PropertyPhoto, (photo) => photo.property, { eager: true })
+  @OneToMany(() => PropertyPhoto, (photo) => photo.property, {
+    eager: true,
+    nullable: true,
+  })
   photos: PropertyPhoto[];
-
-  @Column('decimal', { precision: 2, scale: 1, default: 0 })
-  rating: number;
 }
